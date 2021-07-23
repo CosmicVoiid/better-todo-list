@@ -1,0 +1,41 @@
+body {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	width: 100%;
+	min-height: 10vh;
+	outline: 3px red solid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+h1 {
+	margin: 0;
+}
+
+main {
+	width: 100%;
+	min-height: 80vh;
+	outline: 3px red solid;
+	display: flex;
+}
+
+#sidebar {
+	outline: 1px red solid;
+	width: 20%;
+}
+
+#content {
+	width: 80%;
+	outline: 1px red solid;
+}
+
+footer {
+	width: 100%;
+	min-height: 10vh;
+	outline: 3px red solid;
+}
