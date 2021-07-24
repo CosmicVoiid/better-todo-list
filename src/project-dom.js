@@ -13,10 +13,9 @@ const projectDOM = (() => {
 	});
 
 	function saves() {
-		let savedList = projectLogic.getProject();
+		let savedList = projectLogic.projectList;
 		for (let i = 0; i < savedList.length; i++) {
 			addProject(savedList[i].projectName);
-			console.log(savedList[i].projectName);
 		}
 	}
 
@@ -32,6 +31,8 @@ const projectDOM = (() => {
 		edit.textContent = "E";
 		del.textContent = "X";
 
+		del.addEventListener("click", deleteProject);
+
 		projectName.textContent = inputName;
 
 		project.appendChild(projectName);
@@ -43,6 +44,11 @@ const projectDOM = (() => {
 
 	function addProjectToArray(projectName) {
 		projectLogic.makeProject(projectName, []);
+	}
+
+	function deleteProject() {
+		const project = document.querySelector(".project");
+		projectContainer.removeChild(project);
 	}
 
 	return { addProject, saves };

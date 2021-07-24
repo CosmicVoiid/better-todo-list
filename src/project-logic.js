@@ -6,21 +6,17 @@ class Project {
 }
 
 const projectLogic = (() => {
-	let projectList = [];
+	let projectList = JSON.parse(localStorage.getItem("task.projects")) || [];
 
 	function saveProject(project) {
-		localStorage.setItem("projects", JSON.stringify(project));
-	}
-
-	function getProject() {
-		return JSON.parse(localStorage.getItem("projects"));
+		localStorage.setItem("task.projects", JSON.stringify(project));
 	}
 
 	function makeProject(projectName, todo_list) {
 		let obj = new Project(projectName, todo_list);
 		projectList.push(obj);
 		console.log({ projectList });
-		saveProject(obj);
+		saveProject(projectList);
 	}
 
 	function removeProject(index) {
@@ -31,7 +27,7 @@ const projectLogic = (() => {
 		projectList[index].projectName = newName;
 	}
 
-	return { makeProject, changeName, removeProject, getProject };
+	return { makeProject, changeName, removeProject, projectList };
 })();
 
 export default projectLogic;
