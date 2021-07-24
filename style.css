@@ -85,6 +85,12 @@ main {
 	opacity: 0.2;
 }
 
+.edit-text {
+	width: 75%;
+	order: -1;
+	z-index: 1;
+}
+
 #content {
 	width: 80%;
 	outline: 1px red solid;
