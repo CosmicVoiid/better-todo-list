@@ -20,7 +20,7 @@ const projectLogic = (() => {
 	}
 
 	function removeProject(index) {
-		projectList.splice(index, i);
+		projectList.splice(index, 1);
 	}
 
 	function changeName(newName, index) {
