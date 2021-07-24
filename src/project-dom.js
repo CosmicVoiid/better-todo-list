@@ -3,7 +3,6 @@ import projectLogic from "./project-logic.js";
 const projectDOM = (() => {
 	const projectContainer = document.querySelector("#projects-container");
 	const projectForm = document.querySelector("#add-project");
-	// let index = -1;
 
 	projectForm.addEventListener("submit", (e) => {
 		e.preventDefault();
@@ -13,13 +12,6 @@ const projectDOM = (() => {
 		projectText.value = "";
 	});
 
-	// function saves() {
-	// 	let savedList = projectLogic.projectList;
-	// 	for (let i = 0; i < savedList.length; i++) {
-	// 		addProject(savedList[i].projectName, i);
-	// 	}
-	// }
-
 	function addProject(inputName, i) {
 		const project = document.createElement("div");
 		const projectName = document.createElement("div");
@@ -27,12 +19,26 @@ const projectDOM = (() => {
 		const del = document.createElement("button");
 
 		project.classList.add("project");
+		projectName.classList.add("project-title");
 		edit.classList.add("btn");
 		del.classList.add("btn");
 		edit.textContent = "E";
 		del.textContent = "X";
 
-		del.addEventListener("click", () => {
+		projectName.addEventListener("click", (e) => {
+			e.stopPropagation();
+			deselectProject();
+			projectLogic.select(i, true);
+			render();
+		});
+
+		edit.addEventListener("click", (e) => {
+			e.stopPropagation();
+			editProject(i);
+		});
+
+		del.addEventListener("click", (e) => {
+			e.stopPropagation();
 			deleteProject(i);
 		});
 
@@ -48,19 +54,17 @@ const projectDOM = (() => {
 	function render() {
 		clearProject();
 		let i = 0;
-		let savedList = projectLogic.projectList;
 		let list = projectLogic.projectList;
 		console.log(list);
-		for (i; i < savedList.length; i++) {
-			addProject(savedList[i].projectName, i);
-		}
 		for (i; i < list.length; i++) {
 			addProject(list[i].projectName, i);
+			if (list[i].selected === true) {
+				selectProject(i);
+			}
 		}
 	}
 
 	function clearProject() {
-		// index = -1;
 		while (projectContainer.firstChild) {
 			projectContainer.removeChild(projectContainer.firstChild);
 		}
@@ -71,11 +75,42 @@ const projectDOM = (() => {
 	}
 
 	function deleteProject(i) {
-		console.log(i);
 		const project = document.querySelectorAll(".project");
 		projectContainer.removeChild(project[i]);
 		projectLogic.removeProject(i);
 		render();
+	}
+
+	function editProject(i) {
+		const project = document.querySelectorAll(".project");
+		const projectTitle = document.querySelectorAll(".project-title");
+		const editText = document.createElement("input");
+		editText.classList.add("edit-text");
+		editText.setAttribute("type", "text");
+		editText.setAttribute("maxlength", "10");
+		editText.value = projectLogic.projectList[i].projectName;
+		project[i].removeChild(projectTitle[i]);
+		project[i].appendChild(editText);
+		editText.addEventListener("keypress", (e) => {
+			if (e.key === "Enter") {
+				console.log("yes");
+				projectLogic.changeName(editText.value, i);
+				render();
+			}
+		});
+	}
+
+	function selectProject(i) {
+		deselectProject();
+		projectLogic.select(i, true);
+		const project = document.querySelectorAll(".project");
+		project[i].style.cssText = "background-color: lightblue";
+	}
+
+	function deselectProject() {
+		for (let i = 0; i < projectLogic.projectList.length; i++) {
+			projectLogic.select(i, false);
+		}
 	}
 
 	return { addProject, render };

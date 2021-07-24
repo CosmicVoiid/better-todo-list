@@ -1,7 +1,8 @@
 class Project {
-	constructor(projectName, todo_list) {
+	constructor(projectName, todo_list, selected) {
 		this.projectName = projectName;
 		this.todo_list = todo_list;
+		this.selected = false;
 	}
 }
 
@@ -21,13 +22,20 @@ const projectLogic = (() => {
 
 	function removeProject(index) {
 		projectList.splice(index, 1);
+		saveProject(projectList);
 	}
 
 	function changeName(newName, index) {
 		projectList[index].projectName = newName;
+		saveProject(projectList);
 	}
 
-	return { makeProject, changeName, removeProject, projectList };
+	function select(index, bool) {
+		projectList[index].selected = bool;
+		saveProject(projectList);
+	}
+
+	return { makeProject, changeName, removeProject, select, projectList };
 })();
 
 export default projectLogic;
