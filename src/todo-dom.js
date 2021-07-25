@@ -8,9 +8,14 @@ const todoDOM = (() => {
 			todoButton.classList.add("btn");
 			todoButton.setAttribute("id", "todo-btn");
 			todoButton.textContent = "+";
+
+			todoButton.addEventListener("click", todoModal);
 			content.appendChild(todoButton);
 		}
 	}
+
+	function todoModal() {}
+
 	return { addTodoButton };
 })();
 

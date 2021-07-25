@@ -30,6 +30,33 @@
 
 		<footer>Footer</footer>
 
+		<div id="modal" class="closed modal">
+			<div id="modal-exit" class="btn">X</div>
+			<div id="modal-content">
+				<form id="modal-form">
+					<label for="todo-name">Name</label>
+
+					<input type="text" id="todo-name" maxlength="10" required />
+					<br />
+					<label for="todo-description">Description</label>
+
+					<input type="text" id="todo-description" maxlength="10" />
+					<br />
+					<label for="todo-description">Due-Date</label>
+
+					<input type="date" id="todo-date" maxlength="10" />
+					<br />
+					<label for="priority">Due-Date</label>
+					<select name="priority" id="priority">
+						<option value="Low">Low</option>
+						<option value="Medium">Medium</option>
+						<option value="High">High</option>
+					</select>
+					<br />
+					<input type="submit" id="todo-submit" value="Enter" />
+				</form>
+			</div>
+		</div>
 		<script src="main.js"></script>
 	</body>
 </html>

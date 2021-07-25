@@ -103,6 +103,30 @@ main {
 	outline: 1px red solid;
 }
 
+.modal {
+	position: fixed;
+	max-width: 50%;
+	height: auto;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	outline: 1px red solid;
+	box-shadow: 0 0 0 50vw rgba(0, 0, 0, 0.2);
+	padding: 3%;
+}
+
+#modal-form {
+	display: flex;
+	flex-direction: column;
+}
+
+#modal-exit {
+	position: absolute;
+	right: 5%;
+	top: 5%;
+}
+
 footer {
 	width: 100%;
 	min-height: 10vh;
