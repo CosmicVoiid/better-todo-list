@@ -13,9 +13,10 @@ class Todo {
 const todoLogic = (() => {
 	let todoList = [];
 
-	function makeTodo(name, description, priority) {
-		let obj = new Todo(name, description, "", priority);
+	function makeTodo(todoName, description, date, priority) {
+		let obj = new Todo(todoName, description, date, priority);
 		todoList.push(obj);
+		return obj;
 	}
 
 	function removeTodo(index) {
@@ -35,7 +36,7 @@ const todoLogic = (() => {
 		}
 	}
 
-	return { isSelected };
+	return { isSelected, makeTodo };
 })();
 
 export default todoLogic;

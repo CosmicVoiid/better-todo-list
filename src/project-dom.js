@@ -78,10 +78,12 @@ const projectDOM = (() => {
 	}
 
 	function deleteProject(i) {
+		// if (projectLogic.projectList)
 		const project = document.querySelectorAll(".project");
 		projectContainer.removeChild(project[i]);
 		projectLogic.removeProject(i);
 		render();
+		console.log(todoLogic.isSelected());
 	}
 
 	function editProject(i) {
