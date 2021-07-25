@@ -1,4 +1,6 @@
 import projectLogic from "./project-logic.js";
+import todoLogic from "./todo-logic.js";
+import todoDOM from "./todo-dom.js";
 
 const projectDOM = (() => {
 	const projectContainer = document.querySelector("#projects-container");
@@ -60,6 +62,7 @@ const projectDOM = (() => {
 			addProject(list[i].projectName, i);
 			if (list[i].selected === true) {
 				selectProject(i);
+				todoDOM.addTodoButton();
 			}
 		}
 	}

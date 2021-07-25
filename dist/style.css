@@ -68,6 +68,13 @@ main {
 	cursor: pointer;
 }
 
+#todo-btn {
+	position: absolute;
+	right: 1.5%;
+	top: 12%;
+	font-size: 2rem;
+}
+
 .project-name {
 	width: 75%;
 	border: 0;
