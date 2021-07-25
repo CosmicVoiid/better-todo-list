@@ -25,12 +25,14 @@
 					/>
 				</form>
 			</div>
-			<div id="content">content</div>
+			<div id="content">
+				<button id="todo-btn" class="btn closed">+</button>
+			</div>
 		</main>
 
 		<footer>Footer</footer>
 
-		<div id="modal" class="closed modal">
+		<div id="modal" class="modal closed">
 			<div id="modal-exit" class="btn">X</div>
 			<div id="modal-content">
 				<form id="modal-form">
@@ -46,7 +48,7 @@
 
 					<input type="date" id="todo-date" maxlength="10" />
 					<br />
-					<label for="priority">Due-Date</label>
+					<label for="priority">Priority</label>
 					<select name="priority" id="priority">
 						<option value="Low">Low</option>
 						<option value="Medium">Medium</option>
@@ -57,6 +59,7 @@
 				</form>
 			</div>
 		</div>
+		<div class="modal-overlay closed"></div>
 		<script src="main.js"></script>
 	</body>
 </html>
