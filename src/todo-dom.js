@@ -50,11 +50,49 @@ const todoDOM = (() => {
 		let index = todoLogic.isSelected();
 		projectLogic.projectList[index].todo_list.push(todo);
 		console.log(projectLogic.projectList[index]);
+		displayTodo();
 	}
 
-	function displayTodo() {}
+	function displayTodo() {
+		let index = todoLogic.isSelected();
+		let list = projectLogic.projectList[index];
+		clearTodo();
+		console.log(list.todo_list);
+		for (let i = 0; i < list.todo_list.length; i++) {
+			makeTodoTag(list.todo_list[i]);
+			console.log("test2");
+		}
+	}
 
-	return { addTodoButton, removeTodoButton };
+	function clearTodo() {
+		const content = document.querySelector("#content");
+		const todoContainer = document.querySelectorAll(".todo-container");
+		for (let i = 0; i < todoContainer.length; i++) {
+			content.removeChild(todoContainer[i]);
+		}
+	}
+
+	function makeTodoTag(obj) {
+		const content = document.querySelector("#content");
+		const todoContainer = document.createElement("div");
+		const todoName = document.createElement("div");
+		const todoDescription = document.createElement("div");
+		const todoDate = document.createElement("input");
+
+		todoName.textContent = obj.todoName;
+		todoDescription.textContent = obj.description;
+		todoDate.setAttribute("type", "date");
+		todoDate.value = obj.date;
+
+		todoContainer.classList.add("todo-container");
+
+		todoContainer.appendChild(todoName);
+		todoContainer.appendChild(todoDescription);
+		todoContainer.appendChild(todoDate);
+		content.append(todoContainer);
+	}
+
+	return { addTodoButton, removeTodoButton, displayTodo };
 })();
 
 export default todoDOM;

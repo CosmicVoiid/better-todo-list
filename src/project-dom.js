@@ -63,6 +63,7 @@ const projectDOM = (() => {
 			if (list[i].selected === true) {
 				selectProject(i);
 				todoDOM.addTodoButton();
+				todoDOM.displayTodo();
 			}
 		}
 	}
