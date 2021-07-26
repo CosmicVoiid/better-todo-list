@@ -36,7 +36,7 @@ const todoDOM = (() => {
 		todoName.value = "";
 		todoDescription.value = "";
 		todoDate.value = "";
-		todoPriority.value = "";
+		todoPriority.value = "Low";
 		toggleModal();
 	}
 
@@ -61,6 +61,9 @@ const todoDOM = (() => {
 
 		let index = todoLogic.isSelected();
 		projectLogic.projectList[index].todo_list.push(todo);
+		projectLogic.projectList[index].todo_list = todoLogic.sortList(
+			projectLogic.projectList[index].todo_list
+		);
 		projectLogic.saveProject(projectLogic.projectList);
 		console.log(projectLogic.projectList[index]);
 		displayTodo();
@@ -125,6 +128,20 @@ const todoDOM = (() => {
 			projectLogic.saveProject(projectLogic.projectList);
 		});
 
+		check.addEventListener("click", () => {
+			obj.completed = check.checked;
+			projectLogic.saveProject(projectLogic.projectList);
+		});
+
+		check.checked = obj.completed;
+
+		if (obj.priority === "High")
+			todoContainer.style.cssText = "background-color: red";
+		if (obj.priority === "Medium")
+			todoContainer.style.cssText = "background-color: orange";
+		if (obj.priority === "Low")
+			todoContainer.style.cssText = "background-color: yellow";
+
 		todoText.appendChild(todoName);
 		todoText.appendChild(todoDescription);
 		rightContainer.appendChild(todoDate);
@@ -156,13 +173,17 @@ const todoDOM = (() => {
 			list[i].description = todoDescription.value;
 			list[i].date = todoDate.value;
 			list[i].priority = todoPriority.value;
+			let index = todoLogic.isSelected();
+			projectLogic.projectList[index].todo_list = todoLogic.sortList(
+				projectLogic.projectList[index].todo_list
+			);
 			clearTodo();
 			displayTodo();
 			toggleModal();
 			todoName.value = "";
 			todoDescription.value = "";
 			todoDate.value = "";
-			todoPriority.value = "";
+			todoPriority.value = "Low";
 			projectLogic.saveProject(projectLogic.projectList);
 			this.removeEventListener("submit", todoEditForm);
 			modalForm.addEventListener("submit", modalFlow);

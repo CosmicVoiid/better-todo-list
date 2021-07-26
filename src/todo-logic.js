@@ -19,9 +19,25 @@ const todoLogic = (() => {
 		return obj;
 	}
 
-	function changeTodo(newName, index) {
-		todoList[index].projectName = newName;
-		saveProject(projectList);
+	function sortList(list) {
+		let newList = [];
+		for (let i = 0; i < list.length; i++) {
+			if (list[i].priority === "High") {
+				newList.push(list[i]);
+			}
+		}
+		for (let i = 0; i < list.length; i++) {
+			if (list[i].priority === "Medium") {
+				newList.push(list[i]);
+			}
+		}
+		for (let i = 0; i < list.length; i++) {
+			if (list[i].priority === "Low") {
+				newList.push(list[i]);
+			}
+		}
+
+		return newList;
 	}
 
 	function isSelected() {
@@ -31,7 +47,7 @@ const todoLogic = (() => {
 		}
 	}
 
-	return { isSelected, makeTodo };
+	return { isSelected, makeTodo, sortList };
 })();
 
 export default todoLogic;
