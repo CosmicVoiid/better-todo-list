@@ -35,7 +35,14 @@ const projectLogic = (() => {
 		saveProject(projectList);
 	}
 
-	return { makeProject, changeName, removeProject, select, projectList };
+	return {
+		makeProject,
+		changeName,
+		removeProject,
+		select,
+		saveProject,
+		projectList,
+	};
 })();
 
 export default projectLogic;

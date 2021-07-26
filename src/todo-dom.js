@@ -37,18 +37,19 @@ const todoDOM = (() => {
 	function formSubmit() {
 		const todoName = document.querySelector("#todo-name");
 		const todoDescription = document.querySelector("#todo-description");
-		const todoDate = document.querySelector("#todo-date");
+		const todoDate = document.querySelector("#todo-date").value;
 		const todoPriority = document.querySelector("#priority");
 
 		let todo = todoLogic.makeTodo(
 			todoName.value,
 			todoDescription.value,
-			todoDate.value,
+			todoDate,
 			todoPriority.value
 		);
 
 		let index = todoLogic.isSelected();
 		projectLogic.projectList[index].todo_list.push(todo);
+		projectLogic.saveProject(projectLogic.projectList);
 		console.log(projectLogic.projectList[index]);
 		displayTodo();
 	}
@@ -59,7 +60,7 @@ const todoDOM = (() => {
 		clearTodo();
 		console.log(list.todo_list);
 		for (let i = 0; i < list.todo_list.length; i++) {
-			makeTodoTag(list.todo_list[i]);
+			makeTodoTag(list.todo_list[i], i);
 			console.log("test2");
 		}
 	}
@@ -72,24 +73,52 @@ const todoDOM = (() => {
 		}
 	}
 
-	function makeTodoTag(obj) {
+	function makeTodoTag(obj, i) {
 		const content = document.querySelector("#content");
 		const todoContainer = document.createElement("div");
-		const todoName = document.createElement("div");
+		const check = document.createElement("input");
+		const todoText = document.createElement("div");
+		const todoName = document.createElement("h3");
 		const todoDescription = document.createElement("div");
 		const todoDate = document.createElement("input");
+		const rightContainer = document.createElement("div");
+		const edit = document.createElement("button");
+		const del = document.createElement("button");
 
 		todoName.textContent = obj.todoName;
 		todoDescription.textContent = obj.description;
 		todoDate.setAttribute("type", "date");
 		todoDate.value = obj.date;
+		check.setAttribute("type", "checkbox");
+		edit.textContent = "E";
+		del.textContent = "X";
 
+		todoText.classList.add("todo-text");
 		todoContainer.classList.add("todo-container");
+		edit.classList.add("btn");
+		del.classList.add("btn");
 
-		todoContainer.appendChild(todoName);
-		todoContainer.appendChild(todoDescription);
-		todoContainer.appendChild(todoDate);
+		del.addEventListener("click", () => {
+			console.log(i);
+			deleteTodo(i);
+		});
+
+		todoText.appendChild(todoName);
+		todoText.appendChild(todoDescription);
+		rightContainer.appendChild(todoDate);
+		rightContainer.appendChild(edit);
+		rightContainer.appendChild(del);
+		todoContainer.appendChild(check);
+		todoContainer.appendChild(todoText);
+		todoContainer.appendChild(rightContainer);
 		content.append(todoContainer);
+	}
+
+	function deleteTodo(i) {
+		let list = projectLogic.projectList[todoLogic.isSelected()].todo_list;
+		list.splice(i, 1);
+		projectLogic.saveProject(projectLogic.projectList);
+		displayTodo();
 	}
 
 	return { addTodoButton, removeTodoButton, displayTodo };
