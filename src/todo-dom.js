@@ -27,12 +27,16 @@ const todoDOM = (() => {
 		todoButton.classList.add("closed");
 	}
 
+	function modalFlow() {
+		formSubmit();
+		toggleModal();
+	}
+
 	const modalForm = document.querySelector("#modal-form");
 	modalForm.addEventListener("submit", (e) => {
 		e.preventDefault();
-		formSubmit();
-		toggleModal();
 	});
+	modalForm.addEventListener("submit", modalFlow);
 
 	function formSubmit() {
 		const todoName = document.querySelector("#todo-name");
@@ -98,6 +102,10 @@ const todoDOM = (() => {
 		edit.classList.add("btn");
 		del.classList.add("btn");
 
+		edit.addEventListener("click", () => {
+			editTodo(i);
+		});
+
 		del.addEventListener("click", () => {
 			console.log(i);
 			deleteTodo(i);
@@ -112,6 +120,38 @@ const todoDOM = (() => {
 		todoContainer.appendChild(todoText);
 		todoContainer.appendChild(rightContainer);
 		content.append(todoContainer);
+	}
+
+	function editTodo(i) {
+		let list = projectLogic.projectList[todoLogic.isSelected()].todo_list;
+		const todoName = document.querySelector("#todo-name");
+		const todoDescription = document.querySelector("#todo-description");
+		const todoDate = document.querySelector("#todo-date");
+		const todoPriority = document.querySelector("#priority");
+
+		todoName.value = list[i].todoName;
+		todoDescription.value = list[i].description;
+		todoDate.value = list[i].date;
+		todoPriority.value = list[i].priority;
+		toggleModal();
+
+		modalForm.removeEventListener("submit", modalFlow);
+
+		modalForm.addEventListener("submit", function todoEditForm() {
+			list[i].todoName = todoName.value;
+			list[i].description = todoDescription.value;
+			list[i].date = todoDate.value;
+			list[i].priority = todoPriority.value;
+			clearTodo();
+			displayTodo();
+			toggleModal();
+			todoName.value = "";
+			todoDescription.value = "";
+			todoDate.value = "";
+			todoPriority.value = "";
+			this.removeEventListener("submit", todoEditForm);
+			modalForm.addEventListener("submit", modalFlow);
+		});
 	}
 
 	function deleteTodo(i) {
