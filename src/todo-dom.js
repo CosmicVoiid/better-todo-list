@@ -28,7 +28,15 @@ const todoDOM = (() => {
 	}
 
 	function modalFlow() {
+		const todoName = document.querySelector("#todo-name");
+		const todoDescription = document.querySelector("#todo-description");
+		const todoDate = document.querySelector("#todo-date");
+		const todoPriority = document.querySelector("#priority");
 		formSubmit();
+		todoName.value = "";
+		todoDescription.value = "";
+		todoDate.value = "";
+		todoPriority.value = "";
 		toggleModal();
 	}
 
@@ -93,6 +101,7 @@ const todoDOM = (() => {
 		todoDescription.textContent = obj.description;
 		todoDate.setAttribute("type", "date");
 		todoDate.value = obj.date;
+		todoDate.classList.add("todo-date-div");
 		check.setAttribute("type", "checkbox");
 		edit.textContent = "E";
 		del.textContent = "X";
@@ -109,6 +118,11 @@ const todoDOM = (() => {
 		del.addEventListener("click", () => {
 			console.log(i);
 			deleteTodo(i);
+		});
+
+		todoDate.addEventListener("change", () => {
+			obj.date = todoDate.value;
+			projectLogic.saveProject(projectLogic.projectList);
 		});
 
 		todoText.appendChild(todoName);
@@ -149,6 +163,7 @@ const todoDOM = (() => {
 			todoDescription.value = "";
 			todoDate.value = "";
 			todoPriority.value = "";
+			projectLogic.saveProject(projectLogic.projectList);
 			this.removeEventListener("submit", todoEditForm);
 			modalForm.addEventListener("submit", modalFlow);
 		});

@@ -19,11 +19,6 @@ const todoLogic = (() => {
 		return obj;
 	}
 
-	function removeTodo(index) {
-		todoList.splice(index, 1);
-		saveProject(projectList);
-	}
-
 	function changeTodo(newName, index) {
 		todoList[index].projectName = newName;
 		saveProject(projectList);
