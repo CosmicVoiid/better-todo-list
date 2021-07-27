@@ -28,8 +28,8 @@ main {
 #sidebar {
 	box-shadow: 6px 0px 0 -2px #ddd;
 	width: 20%;
-	min-height: 70vh;
 	height: auto;
+	min-height: 70vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -55,6 +55,7 @@ main {
 	grid-template-columns: 2fr 0.1fr 0.1fr;
 	margin-left: 5%;
 	margin-top: 10%;
+	box-shadow: 0 7px 0 -5px #ddd;
 }
 
 .btn {
@@ -100,10 +101,12 @@ main {
 }
 
 #content {
+	overflow-y: scroll;
+	vertical-align: top;
 	width: 80%;
-	height: auto;
-	min-height: 70vh;
-	padding-bottom: 15%;
+	height: 69vh;
+	padding-bottom: 7.5%;
+	margin-bottom: 1%;
 }
 
 .modal {
@@ -153,6 +156,7 @@ main {
 	justify-content: space-between;
 	margin-bottom: 1%;
 	border-radius: 5px;
+	box-shadow: 0 7px 0 -5px #ddd;
 }
 
 .left-container {
@@ -197,8 +201,8 @@ label {
 }
 
 [type="checkbox"]:checked + .custom-checkbox {
-	background: blue;
-	border-color: blue;
+	background-color: var(--checkColor);
+	border-color: var(--checkColor) _;
 	box-shadow: inset 0 0 0px 2px whitesmoke;
 }
 
