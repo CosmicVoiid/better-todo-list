@@ -79,7 +79,6 @@ const projectDOM = (() => {
 	}
 
 	function deleteProject(i) {
-		// if (projectLogic.projectList)
 		const project = document.querySelectorAll(".project");
 		projectContainer.removeChild(project[i]);
 		projectLogic.removeProject(i);
@@ -109,8 +108,8 @@ const projectDOM = (() => {
 	function selectProject(i) {
 		deselectProject();
 		projectLogic.select(i, true);
-		const project = document.querySelectorAll(".project");
-		project[i].style.cssText = "background-color: lightblue";
+		const projectTitle = document.querySelectorAll(".project-title");
+		projectTitle[i].style.cssText = "font-weight: bold";
 	}
 
 	function deselectProject() {

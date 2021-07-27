@@ -72,7 +72,15 @@ const todoDOM = (() => {
 	function displayTodo() {
 		let index = todoLogic.isSelected();
 		let list = projectLogic.projectList[index];
+		const content = document.querySelector("#content");
+		const projectName = document.createElement("h1");
+		projectName.setAttribute("id", "content-title");
+		content.appendChild(projectName);
 		clearTodo();
+		const projectTitle =
+			projectLogic.projectList[todoLogic.isSelected()].projectName;
+		projectName.textContent = projectTitle;
+		content.appendChild(projectName);
 		console.log(list.todo_list);
 		for (let i = 0; i < list.todo_list.length; i++) {
 			makeTodoTag(list.todo_list[i], i);
@@ -82,14 +90,21 @@ const todoDOM = (() => {
 
 	function clearTodo() {
 		const content = document.querySelector("#content");
+		const projectTitle = document.querySelector("#content-title");
 		const todoContainer = document.querySelectorAll(".todo-container");
 		for (let i = 0; i < todoContainer.length; i++) {
 			content.removeChild(todoContainer[i]);
 		}
+		content.removeChild(projectTitle);
+
+		// while (content.firstChild) {
+		// 	content.removeChild(content.firstChild);
+		// }
 	}
 
 	function makeTodoTag(obj, i) {
 		const content = document.querySelector("#content");
+		const projectName = document.createElement("h1");
 		const todoContainer = document.createElement("div");
 		const check = document.createElement("input");
 		const checkLabel = document.createElement("label");
@@ -102,6 +117,10 @@ const todoDOM = (() => {
 		const rightContainer = document.createElement("div");
 		const edit = document.createElement("button");
 		const del = document.createElement("button");
+
+		const projectTitle =
+			projectLogic.projectList[todoLogic.isSelected()].projectName;
+		projectName.textContent = projectTitle;
 
 		todoName.textContent = obj.todoName;
 		todoDescription.textContent = obj.description;
@@ -161,7 +180,8 @@ const todoDOM = (() => {
 		todoContainer.appendChild(leftContainer);
 		// todoContainer.appendChild(todoText);
 		todoContainer.appendChild(rightContainer);
-		content.append(todoContainer);
+
+		content.appendChild(todoContainer);
 	}
 
 	function editTodo(i) {
