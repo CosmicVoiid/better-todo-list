@@ -35,6 +35,10 @@ main {
 	align-items: center;
 }
 
+#sidebar-name-projects {
+	padding-top: 10%;
+}
+
 #projects-container {
 	width: 70%;
 	display: flex;
@@ -104,9 +108,7 @@ main {
 	overflow-y: scroll;
 	vertical-align: top;
 	width: 80%;
-	height: 69vh;
-	padding-bottom: 7.5%;
-	margin-bottom: 1%;
+	height: 80vh;
 }
 
 .modal {
@@ -210,5 +212,4 @@ footer {
 	width: 100%;
 	min-height: 10vh;
 	box-shadow: 0 -2px 0 2px #ddd;
-	flex-shrink: 0;
 }
