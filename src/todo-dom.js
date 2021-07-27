@@ -92,6 +92,9 @@ const todoDOM = (() => {
 		const content = document.querySelector("#content");
 		const todoContainer = document.createElement("div");
 		const check = document.createElement("input");
+		const checkLabel = document.createElement("label");
+		const checkSpan = document.createElement("span");
+		const leftContainer = document.createElement("div");
 		const todoText = document.createElement("div");
 		const todoName = document.createElement("h3");
 		const todoDescription = document.createElement("div");
@@ -111,8 +114,10 @@ const todoDOM = (() => {
 
 		todoText.classList.add("todo-text");
 		todoContainer.classList.add("todo-container");
+		check.classList.add("custom-checkbox");
 		edit.classList.add("btn");
 		del.classList.add("btn");
+		leftContainer.classList.add("left-container");
 
 		edit.addEventListener("click", () => {
 			editTodo(i);
@@ -141,14 +146,21 @@ const todoDOM = (() => {
 			todoContainer.style.cssText = "background-color: orange";
 		if (obj.priority === "Low")
 			todoContainer.style.cssText = "background-color: yellow";
+		checkSpan.style.cssText = "border-color: red";
 
+		checkLabel.appendChild(check);
+		checkLabel.appendChild(checkSpan);
+		checkSpan.classList.add("custom-checkbox");
 		todoText.appendChild(todoName);
 		todoText.appendChild(todoDescription);
+		leftContainer.appendChild(checkLabel);
+		leftContainer.appendChild(todoText);
 		rightContainer.appendChild(todoDate);
 		rightContainer.appendChild(edit);
 		rightContainer.appendChild(del);
-		todoContainer.appendChild(check);
-		todoContainer.appendChild(todoText);
+		// todoContainer.appendChild(check);
+		todoContainer.appendChild(leftContainer);
+		// todoContainer.appendChild(todoText);
 		todoContainer.appendChild(rightContainer);
 		content.append(todoContainer);
 	}
