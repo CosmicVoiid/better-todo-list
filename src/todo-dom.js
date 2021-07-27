@@ -141,12 +141,11 @@ const todoDOM = (() => {
 		check.checked = obj.completed;
 
 		if (obj.priority === "High")
-			todoContainer.style.cssText = "background-color: red";
+			checkSpan.style.cssText = "border-color: red; --checkColor: red";
 		if (obj.priority === "Medium")
-			todoContainer.style.cssText = "background-color: orange";
+			checkSpan.style.cssText = "border-color: orange; --checkColor: orange";
 		if (obj.priority === "Low")
-			todoContainer.style.cssText = "background-color: yellow";
-		checkSpan.style.cssText = "border-color: red";
+			checkSpan.style.cssText = "border-color: green; --checkColor: green";
 
 		checkLabel.appendChild(check);
 		checkLabel.appendChild(checkSpan);
