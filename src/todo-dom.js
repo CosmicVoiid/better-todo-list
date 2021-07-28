@@ -115,8 +115,15 @@ const todoDOM = (() => {
 		const todoDescription = document.createElement("div");
 		const todoDate = document.createElement("input");
 		const rightContainer = document.createElement("div");
-		const edit = document.createElement("button");
-		const del = document.createElement("button");
+		// const edit = document.createElement("button");
+		// const del = document.createElement("button");
+
+		const del = document.createElement("span");
+		const edit = document.createElement("span");
+		edit.classList.add("material-icons");
+		del.classList.add("material-icons");
+		edit.textContent = "edit";
+		del.textContent = "delete";
 
 		const projectTitle =
 			projectLogic.projectList[todoLogic.isSelected()].projectName;
@@ -128,8 +135,8 @@ const todoDOM = (() => {
 		todoDate.value = obj.date;
 		todoDate.classList.add("todo-date-div");
 		check.setAttribute("type", "checkbox");
-		edit.textContent = "E";
-		del.textContent = "X";
+		// edit.textContent = "E";
+		// del.textContent = "X";
 
 		todoText.classList.add("todo-text");
 		todoContainer.classList.add("todo-container");
@@ -137,6 +144,7 @@ const todoDOM = (() => {
 		edit.classList.add("btn");
 		del.classList.add("btn");
 		leftContainer.classList.add("left-container");
+		rightContainer.classList.add("right-container");
 
 		edit.addEventListener("click", () => {
 			editTodo(i);
@@ -228,7 +236,7 @@ const todoDOM = (() => {
 		displayTodo();
 	}
 
-	return { addTodoButton, removeTodoButton, displayTodo };
+	return { addTodoButton, removeTodoButton, displayTodo, clearTodo };
 })();
 
 export default todoDOM;

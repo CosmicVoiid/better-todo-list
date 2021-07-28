@@ -17,15 +17,20 @@ const projectDOM = (() => {
 	function addProject(inputName, i) {
 		const project = document.createElement("div");
 		const projectName = document.createElement("div");
-		const edit = document.createElement("button");
-		const del = document.createElement("button");
+		// const edit = document.createElement("button");
+		const edit = document.createElement("span");
+		// const del = document.createElement("button");
+		const del = document.createElement("span");
 
 		project.classList.add("project");
 		projectName.classList.add("project-title");
 		edit.classList.add("btn");
+		edit.classList.add("material-icons");
+		del.classList.add("material-icons");
 		del.classList.add("btn");
-		edit.textContent = "E";
-		del.textContent = "X";
+		// edit.textContent = "E";
+		edit.textContent = "edit";
+		del.textContent = "delete";
 
 		projectName.addEventListener("click", (e) => {
 			e.stopPropagation();
@@ -84,6 +89,10 @@ const projectDOM = (() => {
 		projectLogic.removeProject(i);
 		render();
 		console.log(todoLogic.isSelected());
+		todoDOM.clearTodo();
+		if (todoLogic.isSelected() === undefined) {
+			todoDOM.removeTodoButton();
+		}
 	}
 
 	function editProject(i) {
@@ -91,6 +100,7 @@ const projectDOM = (() => {
 		const projectTitle = document.querySelectorAll(".project-title");
 		const editText = document.createElement("input");
 		editText.classList.add("edit-text");
+		editText.classList.add("project-name");
 		editText.setAttribute("type", "text");
 		editText.setAttribute("maxlength", "10");
 		editText.value = projectLogic.projectList[i].projectName;
