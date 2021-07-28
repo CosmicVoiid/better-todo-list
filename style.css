@@ -133,6 +133,10 @@ main {
 	height: 80vh;
 }
 
+#content-title {
+	transform: translate(-5%, 0%);
+}
+
 .modal {
 	position: fixed;
 	max-width: 50%;
